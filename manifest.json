@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Input Text Matcher",
+    "version": "1.0",
+    "description": "Click inputs based on matching adjacent text",
+    "icons": {
+        "16": "icons/16.png",
+        "48": "icons/48.png",
+        "128": "icons/128.png"
+    },
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [],
+    "options_page": ""
+}
