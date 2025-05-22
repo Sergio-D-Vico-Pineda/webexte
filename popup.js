@@ -1,3 +1,11 @@
+// Configuration for section limits
+const SECTION_LIMITS = {
+    primeros: 5,
+    segundos: 5,
+    postres: 5,
+    bebidas: 5
+};
+
 // Function to create a new search item
 function createSearchItem(value = '') {
     const searchItem = document.createElement('div');
@@ -19,26 +27,24 @@ function createSearchItem(value = '') {
     return searchItem;
 }
 
-// Helper function to initialize default search
-function initializeDefaultSearch() {
-    const searchContainer = document.querySelector('#searchContainer');
-    searchContainer.appendChild(createSearchItem());
-}
-
 // Initialize search terms
 async function initializeSearchTerms() {
     if (chrome?.storage?.local) {
         try {
-            const result = await chrome.storage.local.get(['searchTerms']);
-            const searchTerms = result.searchTerms || [];
-            const searchContainer = document.querySelector('#searchContainer');
+            const result = await chrome.storage.local.get(['sectionSearchTerms']);
+            const sectionTerms = result.sectionSearchTerms || {};
 
-            // Clear existing content and add new search items
-            searchContainer.innerHTML = '';
-            searchTerms.forEach(term => {
-                searchContainer.appendChild(createSearchItem(term));
+            Object.keys(SECTION_LIMITS).forEach(section => {
+                const container = document.getElementById(`${section}Container`);
+                const terms = sectionTerms[section] || [''];
+
+                container.innerHTML = '';
+                terms.forEach(term => {
+                    container.appendChild(createSearchItem(term));
+                });
+
+                updateAddButtonVisibility(section);
             });
-            if (searchTerms.length === 12) document.querySelector('#add-btn').style.display = 'none';
         } catch (error) {
             console.error('Storage error:', error);
             initializeDefaultSearch();
@@ -49,60 +55,87 @@ async function initializeSearchTerms() {
     }
 }
 
-// Load saved search terms
-initializeSearchTerms();
+// Helper function to initialize default search
+function initializeDefaultSearch() {
+    Object.keys(SECTION_LIMITS).forEach(section => {
+        const container = document.getElementById(`${section}Container`);
+        container.innerHTML = '';
+        container.appendChild(createSearchItem());
+    });
+}
 
 // Save search terms function
 function saveSearchTerms() {
-    if (chrome && chrome.storage && chrome.storage.local) {
-        const searchInputs = document.querySelectorAll('.search-input');
-        const searchTerms = Array.from(searchInputs).map(input => input.value.trim());
-        chrome.storage.local.set({ searchTerms }).catch(error => {
+    if (chrome?.storage?.local) {
+        const sectionTerms = {};
+
+        Object.keys(SECTION_LIMITS).forEach(section => {
+            const inputs = document.querySelectorAll(`#${section}Container .search-input`);
+            sectionTerms[section] = Array.from(inputs).map(input => input.value.trim());
+        });
+
+        chrome.storage.local.set({ sectionSearchTerms: sectionTerms }).catch(error => {
             console.error('Error saving search terms:', error);
         });
     }
 }
 
-// Add new search field
-document.querySelector('#add-btn').addEventListener('click', () => {
-    const searchContainer = document.querySelector('#searchContainer');
-    const currentSearchItems = searchContainer.querySelectorAll('.search-item');
+// Update add button visibility
+function updateAddButtonVisibility(section) {
+    const container = document.getElementById(`${section}Container`);
+    const addButton = document.querySelector(`#${section}`);
+    const currentItems = container.querySelectorAll('.search-item').length;
 
-    if (currentSearchItems.length < 12) {
-        searchContainer.appendChild(createSearchItem());
-        saveSearchTerms();
+    addButton.style.display = currentItems >= SECTION_LIMITS[section] ? 'none' : 'block';
+}
 
-        // Disable add button if max limit reached
-        if (currentSearchItems.length + 1 >= 12) {
-            document.querySelector('#add-btn').style.display = 'none';
+// Add new search field for specific section
+document.querySelectorAll('.add-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const section = button.id;
+        const container = document.getElementById(`${section}Container`);
+        const currentItems = container.querySelectorAll('.search-item').length;
+
+        if (currentItems < SECTION_LIMITS[section]) {
+            container.appendChild(createSearchItem());
+            saveSearchTerms();
+            updateAddButtonVisibility(section);
         }
-    }
+    });
 });
 
 // Remove search field
-document.querySelector('#searchContainer').addEventListener('click', (e) => {
+document.addEventListener('click', (e) => {
     if (e.target.classList.contains('remove-btn')) {
-        const searchItems = document.querySelectorAll('.search-item');
-        if (searchItems.length > 1) {
-            e.target.closest('.search-item').remove();
-            saveSearchTerms();
+        const searchItem = e.target.closest('.search-item');
+        const container = searchItem.closest('.input-container');
+        const section = container.id.replace('Container', '');
 
-            // Re-enable add button if below max limit
-            if (searchItems.length <= 12) {
-                document.querySelector('#add-btn').style.display = 'block';
-            }
-        } else {
-            alert('You cannot remove the last search field.');
-        }
+        searchItem.remove();
+        saveSearchTerms();
+        updateAddButtonVisibility(section);
+
+        // TODO: add here if there isnt any input, disable the find and click inputs and clear all inputs buttons
     }
 });
 
 // Save on input change
-document.querySelector('#searchContainer').addEventListener('input', (e) => {
+document.addEventListener('input', (e) => {
     if (e.target.classList.contains('search-input')) {
         saveSearchTerms();
     }
 });
+
+// Clear all inputs
+document.getElementById('clearAllBtn').addEventListener('click', () => {
+    document.querySelectorAll('.search-input').forEach(input => {
+        input.value = '';
+    });
+    saveSearchTerms();
+});
+
+// Load saved search terms
+initializeSearchTerms();
 
 // Create results popup
 function showResults(results) {
@@ -112,7 +145,9 @@ function showResults(results) {
     const resultsContent = document.createElement('div');
     resultsContent.className = 'results-content';
 
-    const unmatchedTexts = results.filter(r => r.matchCount === 0).map(r => r.text);
+    const unmatchedTexts = results.filter(r => r.matchCount === 0).map(r => {
+        return r.suggestion ? `${r.text} (Sug: ${r.suggestion})` : r.text;
+    });
     const singleMatches = results.filter(r => r.matchCount === 1).map(r => r.text);
     const multipleMatches = results.filter(r => r.matchCount > 1).map(r => `${r.text} (${r.matchCount} matches)`);
 
@@ -178,7 +213,8 @@ document.querySelector('#findButton').addEventListener('click', async () => {
                     console.log('Response from content script:', response);
                     results.push({
                         text: searchText,
-                        matchCount: response?.matchCount || 0
+                        matchCount: response?.matchCount || 0,
+                        suggestion: response?.bestMatch || ''
                     });
                 } catch (messageError) {
                     console.error('Message sending failed:', messageError);
@@ -197,8 +233,10 @@ document.querySelector('#findButton').addEventListener('click', async () => {
 });
 
 // Handle Enter key press on any search input
-document.querySelector('#searchContainer').addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && e.target.classList.contains('search-input')) {
-        document.querySelector('#findButton').click();
-    }
-});
+document.querySelectorAll('input-container').forEach(container => {
+    container.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && e.target.classList.contains('search-input')) {
+            document.querySelector('#findButton').click();
+        }
+    });
+})

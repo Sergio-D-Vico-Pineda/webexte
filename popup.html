@@ -7,14 +7,62 @@
 </head>
 
 <body>
-    <div class="input-container" id="searchContainer">
-        <div class="search-item">
-            <input type="text" class="search-input" placeholder="Enter text to match...">
-            <button class="remove-btn">×</button>
+    <section>
+        <div class="title-container">
+            <p class="title">Primeros platos</p>
+            <button type="button" class="add-btn" id="primeros">Add Input</button>
         </div>
-    </div>
-    <button id="add-btn" class="add-btn">Add Another Search</button>
-    <button id="findButton">Find and Click Inputs</button>
+        <div class="input-container" id="primerosContainer">
+            <div class="search-item">
+                <input type="text" class="search-input" placeholder="Enter text to match...">
+                <button type="button" class="remove-btn">×</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="title-container">
+            <p class="title">Segundos platos</p>
+            <button type="button" class="add-btn" id="segundos">Add Input</button>
+        </div>
+        <div class="input-container" id="segundosContainer">
+            <div class="search-item">
+                <input type="text" class="search-input" placeholder="Enter text to match...">
+                <button type="button" class="remove-btn">×</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="title-container">
+            <p class="title">Postres</p>
+            <button type="button" class="add-btn" id="postres">Add Input</button>
+        </div>
+        <div class="input-container" id="postresContainer">
+            <div class="search-item">
+                <input type="text" class="search-input" placeholder="Enter text to match...">
+                <button type="button" class="remove-btn">×</button>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="title-container">
+            <p class="title">Bebidas</p>
+            <button type="button" class="add-btn" id="bebidas">Add Input</button>
+        </div>
+        <div class="input-container" id="bebidasContainer">
+            <div class="search-item">
+                <input type="text" class="search-input" placeholder="Enter text to match...">
+                <button type="button" class="remove-btn">×</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="btn-section">
+        <button type="button" id="findButton">Find and Click Inputs</button>
+        <button type="button" id="clearAllBtn" class="clear-btn">Clear</button>
+    </section>
     <script src="popup.js"></script>
 </body>
 
