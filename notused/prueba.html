@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1650px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+            >section {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 20px;
+                row-gap: 10px;
+
+                >div {
+                    width: 20%;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    text-wrap: nowrap;
+                    /* text-align: center; */
+                }
+            }
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #ecf0f1;
+            border-radius: 4px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+
+        label {
+            font-size: 1.1em;
+            color: #34495e;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <form name="f_plan_empresa" id="f_plan_empresa" action="index.php" method="POST" novalidate="novalidate">
+        <!-- PRIMERO -->
+        <div>
+            <h1>&gt; PRIMERO</h1>
+        </div>
+        <section>
+            <div>
+                <input type="checkbox" name="plato_2_57" value="57">
+                <label>"Papas ""alińá"""</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_41" value="41">
+                <label>Alubias blancas guisadas</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_9" value="9">
+                <label>Arroz a la cubana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_37" value="37">
+                <label>Arroz a la zaragozana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_14" value="14">
+                <label>Arroz de la huerta</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_12" value="12">
+                <label>Arroz milanesa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_5" value="5">
+                <label>Arroz montańa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_30" value="30">
+                <label>Arroz negro</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_1" value="1">
+                <label>Arroz tres delicias</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_16" value="16">
+                <label>Brocoli con patatas</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_500" value="500">
+                <label>Buffet de ensalada</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_140" value="140">
+                <label>Canelones de atún</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_24" value="24">
+                <label>Caracolillos a la napolitana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_27" value="27">
+                <label>Coliflor gratinada</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_48" value="48">
+                <label>Coliflor rehogada</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_40" value="40">
+                <label>Cous cous con verduras y frutos secos</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_139" value="139">
+                <label>Crema de boniato con crujiente de garbanzos</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_49" value="49">
+                <label>Crema de calabacín con picatostes</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_54" value="54">
+                <label>Crema de calabaza y pera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_61" value="61">
+                <label>Crema de puerro fría</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_42" value="42">
+                <label>Crema de verduras</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_60" value="60">
+                <label>Crema de zanahoria al curry</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_59" value="59">
+                <label>Ensalada de garbanzos</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_6" value="6">
+                <label>Ensalada de lentejas</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_25" value="25">
+                <label>Ensalada de pasta</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_47" value="47">
+                <label>Ensalada del chef</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_11" value="11">
+                <label>Ensalada griega</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_63" value="63">
+                <label>Ensaladilla rusa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_26" value="26">
+                <label>Espinacas a la crema</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_10" value="10">
+                <label>Espirales a la bolońesa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_55" value="55">
+                <label>Espirales al pesto de brócoli</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_53" value="53">
+                <label>Fideua marinera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_56" value="56">
+                <label>Fussili con queso</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_19" value="19">
+                <label>Gazpacho</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_137" value="137">
+                <label>Gratinado de puerros</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_33" value="33">
+                <label>Guisantes a la francesa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_23" value="23">
+                <label>Judías verdes al ajillo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_50" value="50">
+                <label>Judiones</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_39" value="39">
+                <label>Lasańa de carne</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_18" value="18">
+                <label>Lentejas a la burgalesa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_20" value="20">
+                <label>Lentejas a la castellana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_2" value="2">
+                <label>Lentejas a la hortela</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_36" value="36">
+                <label>Macarrones a la carbonara</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_13" value="13">
+                <label>Macarrones con atún</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_7" value="7">
+                <label>Macarrones con chorizo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_4" value="4">
+                <label>Menestra de verduras</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_17" value="17">
+                <label>Paella de verduras</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_43" value="43">
+                <label>Paella mixta</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_21" value="21">
+                <label>Paella valenciana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_34" value="34">
+                <label>Patatas a la riojana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_46" value="46">
+                <label>Patatas con salsa verde</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_52" value="52">
+                <label>Patatas marinera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_31" value="31">
+                <label>Pisto manchego</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_15" value="15">
+                <label>Purrusalda</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_44" value="44">
+                <label>Repollo al ajoarriero</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_32" value="32">
+                <label>Risotto de calabacín</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_28" value="28">
+                <label>Risotto de calabaza</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_8" value="8">
+                <label>Salmorejo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_35" value="35">
+                <label>Salteado campestre</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_38" value="38">
+                <label>Setas salteadas con calabacín</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_22" value="22">
+                <label>Sopa de cocido</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_58" value="58">
+                <label>Sopa de picadillo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_51" value="51">
+                <label>Sopa fría de tomate y sandía</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_62" value="62">
+                <label>Spaguettis a la primavera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_29" value="29">
+                <label>Spaguettis con bacon</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_45" value="45">
+                <label>Tallarines a la vietnamita</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_2_3" value="3">
+                <label>Tallarines amatriciana</label>
+            </div>
+            <hr>
+        </section>
+        <!-- SEGUNDO -->
+        <div>
+            <h1>&gt; SEGUNDO</h1>
+        </div>
+        <section>
+            <input type="hidden" name="menu_formato_cantidad_3" id="" value="2">
+            <div>
+                <input type="checkbox" name="plato_3_107" value="107">
+                <label>Albóndigas en salsa de setas</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_110" value="110">
+                <label>Albóndigas en salsa espańola</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_72" value="72">
+                <label>Alitas de pollo kentuchy</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_89" value="89">
+                <label>Bacaladitos a la andaluza</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_131" value="131">
+                <label>Bacalao a la plancha</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_128" value="128">
+                <label>Bacalao al ajoarriero</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_130" value="130">
+                <label>Bacalao gratinado</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_91" value="91">
+                <label>Boquerones fritos</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_108" value="108">
+                <label>Caballa con tomate</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_81" value="81">
+                <label>Caella a la marisquera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_86" value="86">
+                <label>Calamares en su tinta</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_121" value="121">
+                <label>Callos</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_75" value="75">
+                <label>Cazón a la marinera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_101" value="101">
+                <label>Cerdo en salsa agridulce</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_120" value="120">
+                <label>Chuleta de cerdo a la plancha</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_78" value="78">
+                <label>Chuleta de sajonia</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_84" value="84">
+                <label>Cocido completo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_88" value="88">
+                <label>Costillas a la barbacoa</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_77" value="77">
+                <label>Croquetas de bacalao</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_125" value="125">
+                <label>Croquetas de jamón</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_93" value="93">
+                <label>Delicias de pescado</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_127" value="127">
+                <label>Escalope de cerdo</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_132" value="132">
+                <label>Escalope de pollo a la napolitana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_122" value="122">
+                <label>Filete de cerdo a la plancha</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_141" value="141">
+                <label>Fritura</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_85" value="85">
+                <label>Gallo a la plancha</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_118" value="118">
+                <label>Gallo a la romana</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_104" value="104">
+                <label>Gallo al horno</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_67" value="67">
+                <label>Hamburguesa a la plancha</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_112" value="112">
+                <label>Hamburguesa a la plancha en salsa de tomate</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_135" value="135">
+                <label>Huevos a la jardinera</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_3_100" value="100">
+                <label>Tortilla paisana</label>
+            </div>
+            <hr>
+        </section>
+        <!-- POSTRE -->
+        <div>
+            <h1>&gt; POSTRE</h1>
+        </div>
+        <section>
+            <input type="hidden" name="menu_formato_cantidad_4" id="" value="4">
+            <div>
+                <input type="checkbox" name="plato_4_502" value="502">
+                <label>Fruta variada</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_4_501" value="501">
+                <label>Postres variados</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="plato_4_503" value="503">
+                <label>Yogourt - sabor variado</label>
+            </div>
+            <hr>
+        </section>
+        <!-- BEBIDAS -->
+        <div>
+            <h1>&gt; BEBIDAS</h1>
+        </div>
+        <section>
+            <input type="hidden" name="menu_formato_cantidad_6" id="" value="7">
+            <div>
+                <input type="checkbox" name="1" value="1">
+                <label>AGUA</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="2" value="2">
+                <label>REFRESCO</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="3" value="3">
+                <label>CERVEZA</label>
+            </div>
+            <hr>
+            <div>
+                <input type="checkbox" name="4" value="4">
+                <label>VINO</label>
+            </div>
+            <hr>
+        </section>
+    </form>
+</body>
+
+</html>
