@@ -8,3 +8,5 @@ if (label && label.tagName.toLowerCase() === 'label') {
         lastMatchedInput = input;
     }
 } */
+
+const a = 'service_worker": "background.js"'
