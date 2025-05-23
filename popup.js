@@ -146,7 +146,51 @@ function showResults(results) {
     resultsContent.className = 'results-content';
 
     const unmatchedTexts = results.filter(r => r.matchCount === 0).map(r => {
-        return r.suggestion ? `${r.text} (Sug: ${r.suggestion})` : r.text;
+        if (!r.suggestion) return r.text;
+        const text = document.createElement('span');
+        text.textContent = `${r.text} (Sug: ${r.suggestion})`;
+        const tryButton = document.createElement('button');
+        tryButton.textContent = 'Try';
+        tryButton.className = 'try-suggestion-btn';
+        tryButton.onclick = async (e) => {
+            e.stopPropagation();
+            const searchInputs = document.querySelectorAll('.search-input');
+            const currentInput = Array.from(searchInputs).find(input => input.value.trim() === r.text);
+            if (currentInput) {
+                currentInput.value = r.suggestion;
+                // Create a single-item search for this suggestion
+                const singleSearch = async () => {
+                    try {
+                        const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+                        if (!tab) throw new Error('No active tab found');
+
+                        await chrome.tabs.sendMessage(tab.id, { action: 'ping' });
+
+                        const response = await chrome.tabs.sendMessage(tab.id, {
+                            action: 'findAndClickInput',
+                            searchText: r.suggestion
+                        });
+
+                        const results = [{
+                            text: r.suggestion,
+                            matchCount: response?.matchCount || 0,
+                            suggestion: response?.bestMatch || ''
+                        }];
+
+                        showResults(results);
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert(error.message || 'Please refresh the page and try again.');
+                    }
+                };
+                singleSearch();
+            }
+        };
+        const container = document.createElement('div');
+        container.className = 'suggestion-container';
+        container.appendChild(text);
+        container.appendChild(tryButton);
+        return container;
     });
     const singleMatches = results.filter(r => r.matchCount === 1).map(r => r.text);
     const multipleMatches = results.filter(r => r.matchCount > 1).map(r => `${r.text} (${r.matchCount} matches)`);
@@ -161,7 +205,11 @@ function showResults(results) {
     if (unmatchedTexts.length > 0) {
         const unmatched = document.createElement('p');
         unmatched.className = 'unmatched';
-        unmatched.textContent = `Not found: ${unmatchedTexts.join(', ')}`;
+        unmatched.textContent = 'Not found:';
+        unmatchedTexts.forEach((item, index) => {
+            if (index > 0) unmatched.appendChild(document.createTextNode(', '));
+            unmatched.appendChild(typeof item === 'string' ? document.createTextNode(item) : item);
+        });
         resultsContent.appendChild(unmatched);
     }
 
@@ -172,13 +220,20 @@ function showResults(results) {
         resultsContent.appendChild(multiple);
     }
 
-    resultsPopup.addEventListener('click', () => {
+    // Add close button
+    const closeButton = document.createElement('button');
+    closeButton.className = 'close-popup-btn';
+    closeButton.textContent = '×';
+    closeButton.onclick = () => resultsPopup.remove();
+    resultsContent.appendChild(closeButton);
+
+    /* resultsPopup.addEventListener('click', () => {
         resultsPopup.remove();
-    });
+    }); */
 
     resultsPopup.appendChild(resultsContent);
     document.body.appendChild(resultsPopup);
-    setTimeout(() => resultsPopup.remove(), 6500);
+    // setTimeout(() => resultsPopup.remove(), 6500);
 }
 
 // Handle search

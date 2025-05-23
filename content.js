@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener((request, _sender, sendResponse) => {
 
     if (firstClick) {
         firstClick = false;
-        inputs = document.querySelectorAll('input');
+        inputs = document.querySelectorAll('input[type="checkbox"]');
         console.log('content.js: findAndClickInpunt: inputs: ', inputs);
     }
 });
@@ -49,12 +49,14 @@ function findAndClickInput(searchText) {
             const siblingLabel = parent.querySelector('label');
             if (siblingLabel) {
                 const labelText = siblingLabel.textContent.trim();
-                const searchTextLower = searchText.toLowerCase();
-                const labelTextLower = labelText.toLowerCase();
+                let searchTextLower = searchText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                let labelTextLower = labelText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                // Normalize text by removing accents, special characters, spaces and line breaks
+                labelTextLower = labelTextLower.replace(/\s+/g, ' ').trim();
 
                 // Calcular distancia de Levenshtein
                 if (labelTextLower === searchTextLower) {
-                    matchCount++;
                     lastMatchedInput = input;
                     throw new Error('Exact match found'); // Stop the iteration now
                 } else {
@@ -67,6 +69,8 @@ function findAndClickInput(searchText) {
             }
         });
     } catch (error) {
+        matchCount = 1;
+        bestMatch = { input: lastMatchedInput, distance: 0, labelText: searchText };
         console.log(error.message + ', stopping iteration');
     }
 
