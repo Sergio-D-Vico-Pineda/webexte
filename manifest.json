@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "Input Text Matcher",
-    "version": "1.4",
+    "version": "1.5",
     "description": "Click inputs based on matching adjacent text",
     "icons": {
         "16": "icons/16.png",

@@ -84,5 +84,4 @@ function findAndClickInput(searchText) {
     }
 
     return { found: matchCount > 0, matchCount, bestMatch: bestMatch.labelText };
-
 }

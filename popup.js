@@ -158,6 +158,7 @@ function showResults(results) {
             const currentInput = Array.from(searchInputs).find(input => input.value.trim() === r.text);
             if (currentInput) {
                 currentInput.value = r.suggestion;
+                saveSearchTerms()
                 // Create a single-item search for this suggestion
                 const singleSearch = async () => {
                     try {
